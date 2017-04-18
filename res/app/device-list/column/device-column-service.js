@@ -255,7 +255,8 @@ module.exports = function DeviceColumnService($filter, gettext) {
   , provider: TextCell({
       title: gettext('Location')
     , value: function(device) {
-        return device.provider ? device.provider.name : ''
+        //return device.provider ? device.provider.name : ''
+        return device.display ? device.display.url : ''
       }
     })
   , notes: DeviceNoteCell({
