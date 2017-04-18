@@ -18,30 +18,6 @@ var filterOps = {
   }
 }
 
-// Trying to update URL evice field
-module.exports = function RemoteDebugCtrl($scope, $timeout, gettext) {
-  function startRemoteConnect() {
-    if ($scope.control) {
-      $scope.control.startRemoteConnect().then(function(result) {
-        var url = result.lastData
-      })
-
-      return true
-    }
-    return false
-  }
-
-  // TODO: Remove timeout and fix control initialization
-  if (!startRemoteConnect()) {
-    $timeout(function() {
-      if (!startRemoteConnect()) {
-        $timeout(startRemoteConnect, 1000)
-      }
-    }, 200)
-  }
-
-}
-
 module.exports = function DeviceColumnService($filter, gettext) {
   // Definitions for all possible values.
   return {
@@ -280,8 +256,7 @@ module.exports = function DeviceColumnService($filter, gettext) {
       title: gettext('Location')
     , value: function(device) {
         //return device.provider ? device.provider.name : ''
-        //return device.display ? device.display.url : ''
-        return url : ''
+        return device.display ? device.display.url : ''
       }
     })
   , notes: DeviceNoteCell({
